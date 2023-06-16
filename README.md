@@ -76,7 +76,7 @@ dataLayer.push({
 ```
 const cart = {{ cart | json }};
 
-// GA4 view cart
+// GA4 view_cart
 dataLayer.push({ecommerce: null});
 dataLayer.push({
     event: "view_cart",
@@ -97,7 +97,7 @@ dataLayer.push({
     }
 });
 
-// GA4 begin checkout
+// GA4 begin_checkout
 dataLayer.push({ecommerce: null});
 dataLayer.push({
     event: 'begin_checkout',
