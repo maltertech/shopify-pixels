@@ -1,3 +1,1 @@
-# datalayer
-
-{% render "datalayer-view" %}
+# GA4 by MalterTech
