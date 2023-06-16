@@ -1,4 +1,4 @@
-# GA4 by MalterTech
+# GA4 Shopify by MalterTech
 
 ## View Collection
 ```
