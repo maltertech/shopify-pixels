@@ -120,7 +120,7 @@ dataLayer.push({
 ```
 
 ## Purchase
-### This needs be placed on /admin/settings/checkout udner Additional scripts.
+### This needs be placed on /admin/settings/checkout under Additional scripts.
 ```
 {% if first_time_accessed %}
 
