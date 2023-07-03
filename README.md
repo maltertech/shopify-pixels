@@ -13,8 +13,8 @@ dataLayer.push({
         currency: Shopify.currency.active,
         items: collection.products.map(function (item, index) {
             return {
-                item_id: item.product_id,
-                item_name: item.product_title,
+                item_id: item.id,
+                item_name: item.title,
                 index: index,
                 item_list_id: collection.id,
                 item_list_name: collection.title,
