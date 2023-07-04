@@ -11,6 +11,8 @@ dataLayer.push({
     event: "view_item_list",
     ecommerce: {
         currency: Shopify.currency.active,
+        item_list_id: collection.id,
+        item_list_name: collection.title,
         items: collection.products.map(function (item, index) {
             return {
                 item_id: item.id,
