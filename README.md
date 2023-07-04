@@ -41,6 +41,7 @@ dataLayer.push({
     event: "view_item",
     ecommerce: {
         currency: Shopify.currency.active,
+        value: activeVariant.price / 100,
         items: [
             {
                 item_id: product.id,
@@ -58,9 +59,8 @@ dataLayer.push({ecommerce: null});
 dataLayer.push({
     event: 'add_to_cart',
     ecommerce: {
-        subscription_included: false,
-        value: activeVariant.price * quantity / 100,
         currency: Shopify.currency.active,
+        value: activeVariant.price * quantity / 100,
         items: [{
             item_id: product.id,
             item_name: product.title,
@@ -68,7 +68,8 @@ dataLayer.push({
             price: activeVariant.price / 100,
             quantity: quantity,
             subscription_item: false,
-        }]
+        }],
+        subscription_included: false,
     }
 });
 ```
@@ -83,7 +84,6 @@ dataLayer.push({ecommerce: null});
 dataLayer.push({
     event: "view_cart",
     ecommerce: {
-        subscription_included: cart.items.filter(item => item.selling_plan_allocation).length > 0,
         currency: Shopify.currency.active,
         value: cart.total_price / 100,
         items: cart.items.map(function (item) {
@@ -95,7 +95,8 @@ dataLayer.push({
                 quantity: item.quantity,
                 subscription_item: item.selling_plan_allocation !== undefined
             }
-        })
+        }),
+        subscription_included: cart.items.filter(item => item.selling_plan_allocation).length > 0,
     }
 });
 
@@ -104,7 +105,6 @@ dataLayer.push({ecommerce: null});
 dataLayer.push({
     event: 'begin_checkout',
     ecommerce: {
-        subscription_included: cart.items.filter(item => item.selling_plan_allocation).length > 0,
         currency: Shopify.currency.active,
         value: cart.total_price / 100,
         items: cart.items.map(function (item) {
@@ -116,7 +116,8 @@ dataLayer.push({
                 quantity: item.quantity,
                 subscription_item: item.selling_plan_allocation !== undefined
             }
-        })
+        }),
+        subscription_included: cart.items.filter(item => item.selling_plan_allocation).length > 0,
     }
 });
 ```
@@ -133,13 +134,12 @@ dataLayer.push({
         dataLayer.push({
             event: "purchase",
             ecommerce: {
-               subscription_included: Shopify.Checkout.hasSellingPlan,
-               transaction_id: "{{ checkout.order_number }}",
+                currency: "{{ checkout.currency }}",
+                transaction_id: "{{ checkout.order_number }}",
                 affiliation: "Online Store",
                 value: {{ checkout.total_price | times: 0.01 }},
                 tax: {{ checkout.tax_price | times: 0.01 }},
                 shipping: {{ checkout.shipping_price | times: 0.01 }},
-                currency: "USD",
                 coupon: `{{ checkout.discount_applications[0].title }}`,
                 items: [
                     {% for item in checkout.line_items %}
@@ -153,6 +153,7 @@ dataLayer.push({
                     },
                     {% endfor %}
                 ],
+                subscription_included: Shopify.Checkout.hasSellingPlan,
             }
         });
     </script>
