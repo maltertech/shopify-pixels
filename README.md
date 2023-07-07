@@ -1,6 +1,8 @@
 # GA4 Shopify by MalterTech
 
-## View Collection
+This is a general guide on how to push GA4 dataLayer events using data from Shopify.
+
+### View Collection
 ```
 const collection = {{ collection | json }};
 collection.products = {{ collection.products | json }};
@@ -27,9 +29,9 @@ dataLayer.push({
 });
 ```
 
-## View Product & Add To Cart
-### Note, this code will only be accurate if you update activeVariant and qauntity.
-### If there are subscriptions, build in the logic for subscription_included and subscription_item
+### View Product & Add To Cart
+Note, this code will only be accurate if you update activeVariant and qauntity.
+If there are subscriptions, build in the logic for subscription_included and subscription_item
 ```
 const product = {{ product | json }};
 const activeVariant = {{ product.selected_or_first_available_variant | json }};
@@ -74,8 +76,8 @@ dataLayer.push({
 });
 ```
 
-## View Cart & Begin Checkout
-### Only fire beign_checkout when you redirect the user to /checkout
+### View Cart & Begin Checkout
+Only fire beign_checkout when you redirect the user to /checkout
 ```
 const cart = {{ cart | json }};
 
@@ -122,8 +124,8 @@ dataLayer.push({
 });
 ```
 
-## Purchase
-### This needs be placed on /admin/settings/checkout under Additional scripts.
+### Purchase
+This needs be placed on /admin/settings/checkout under Additional scripts.
 ```
 {% if first_time_accessed %}
 
