@@ -19,6 +19,9 @@ dataLayer.push({
             return {
                 item_id: item.id,
                 item_name: item.title,
+                item_variant: item.variants[0].title,
+                item_category: item.type,
+                quantity: 1,
                 index: index,
                 item_list_id: collection.id,
                 item_list_name: collection.title,
@@ -48,6 +51,7 @@ dataLayer.push({
             {
                 item_id: product.id,
                 item_name: product.title,
+                item_category: item.type,
                 item_variant: activeVariant.id,
                 price: activeVariant.price / 100,
                 quantity: 1
@@ -66,6 +70,7 @@ dataLayer.push({
         items: [{
             item_id: product.id,
             item_name: product.title,
+            item_category: item.type,
             item_variant: activeVariant.title,
             price: activeVariant.price / 100,
             quantity: quantity,
@@ -93,6 +98,7 @@ dataLayer.push({
                 item_id: item.product_id,
                 item_name: item.product_title,
                 item_variant: item.variant_title,
+                item_category: item.type,
                 price: item.price / 100,
                 quantity: item.quantity,
                 subscription_item: item.selling_plan_allocation !== undefined
@@ -113,6 +119,7 @@ dataLayer.push({
             return {
                 item_id: item.product_id,
                 item_name: item.product_title,
+                item_category: item.type,
                 item_variant: item.variant_title,
                 price: item.price / 100,
                 quantity: item.quantity,
@@ -149,6 +156,7 @@ This needs be placed on /admin/settings/checkout under Additional scripts.
                         'item_name': `{{ item.product.title }}`,
                         'item_id': '{{ item.product_id }}',
                         'item_variant': `{{ item.variant.title }}`,
+                        'item_category': `{{ item.type }}`,
                         'price': {{ item.final_price | times: 0.01 }},
                         'quantity': {{ item.quantity }},
                         'subscription_item': {% if item.selling_plan_allocation == nil %}false{% else %}true{% endif %}
