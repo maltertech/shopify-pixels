@@ -156,7 +156,7 @@ This needs be placed on /admin/settings/checkout under Additional scripts.
                         'item_name': `{{ item.product.title }}`,
                         'item_id': '{{ item.product_id }}',
                         'item_variant': `{{ item.variant.title }}`,
-                        'item_category': `{{ item.type }}`,
+                        'item_category': `{{ item.product.type }}`,
                         'price': {{ item.final_price | times: 0.01 }},
                         'quantity': {{ item.quantity }},
                         'subscription_item': {% if item.selling_plan_allocation == nil %}false{% else %}true{% endif %}
