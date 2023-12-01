@@ -196,6 +196,7 @@ This needs be placed on /admin/settings/checkout under Additional scripts.
 ```
 
 Variable Mappings:
+```
 Shopify.checkout.email
 Shopify.checkout.shipping_address.phone
 Shopify.checkout.shipping_address.first_name
@@ -205,4 +206,4 @@ Shopify.checkout.shipping_address.city
 Shopify.checkout.shipping_address.province
 Shopify.checkout.shipping_address.country_code
 Shopify.checkout.shipping_address.zip
-
+```
