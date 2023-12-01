@@ -251,6 +251,7 @@ analytics.subscribe("collection_viewed", (event) => {
             })
         }
     });
+    console.log(dataLayer);
 });
 
 // GA4 view_item
@@ -274,6 +275,7 @@ analytics.subscribe("product_viewed", (event) => {
             ]
         }
     });
+    console.log(dataLayer);
 });
 
 // GA4 add_to_cart
@@ -297,6 +299,7 @@ analytics.subscribe("product_added_to_cart", (event) => {
             subscription_included: event.data.cartLine.merchandise.product.title.includes("(Subscription)"),
         }
     });
+    console.log(dataLayer);
 });
 
 // GA4 begin_checkout
@@ -307,7 +310,7 @@ analytics.subscribe("checkout_started", (event) => {
         event: 'begin_checkout',
         ecommerce: {
             currency: event.data.checkout.currencyCode,
-            value: event.data.checkout.totalPrice,
+            value: event.data.checkout.totalPrice.amount,
             items: event.data.checkout.lineItems.map(function (item) {
                 return {
                     item_id: item.variant.product.id,
@@ -322,6 +325,7 @@ analytics.subscribe("checkout_started", (event) => {
             subscription_included: event.data.checkout.lineItems.filter(item => item.variant.product.title.includes("(Subscription)")).length > 0,
         }
     });
+    console.log(dataLayer);
 });
 
 // GA4 purchase
@@ -351,5 +355,6 @@ analytics.subscribe("checkout_completed", (event) => {
             })
         }
     });
+    console.log(dataLayer);
 });
 ```
