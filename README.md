@@ -70,7 +70,7 @@ dataLayer.push({
         items: [{
             item_id: product.id,
             item_name: product.title,
-            item_category: item.type,
+            item_category: product.type,
             item_variant: activeVariant.title,
             price: activeVariant.price / 100,
             quantity: quantity,
