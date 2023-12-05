@@ -3,6 +3,7 @@
 This is a general guide on how to push GA4 dataLayer events using data from Shopify.
 
 ### View Collection
+
 ```
 const collection = {{ collection | json }};
 collection.products = {{ collection.products | json }};
@@ -33,8 +34,10 @@ dataLayer.push({
 ```
 
 ### View Product & Add To Cart
+
 Note, this code will only be accurate if you update activeVariant and qauntity.
 If there are subscriptions, build in the logic for subscription_included and subscription_item
+
 ```
 const product = {{ product | json }};
 const activeVariant = {{ product.selected_or_first_available_variant | json }};
@@ -82,7 +85,9 @@ dataLayer.push({
 ```
 
 ### View Cart & Begin Checkout
+
 Only fire beign_checkout when you redirect the user to /checkout
+
 ```
 const cart = {{ cart | json }};
 
@@ -131,12 +136,94 @@ dataLayer.push({
 });
 ```
 
-### Purchase
-This needs be placed on /admin/settings/checkout under Additional scripts.
-```
-{% if first_time_accessed %}
+### Purchase (Post Purchase Page)
 
-    <!-- Fire GA event -->
+This needs be placed on /admin/settings/checkout under Post-purchase additional scripts.
+
+```
+<!-- Fire GA event -->
+<script>
+    // make sure the initial conversion isn't tracked twice
+    if (!Shopify.wasPostPurchasePageSeen) {
+        const order = window.Shopify.order;
+
+        // track initial conversion
+        dataLayer.push({ecommerce: null});
+        dataLayer.push({
+            event: "purchase",
+            ecommerce: {
+                currency: order.currency,
+                transaction_id: order.id,
+                affiliation: "Online Store",
+                value: order.totalPrice,
+                coupon: order.discounts,
+                items: order.lineItems.map(function (item) {
+                    return {
+                        item_id: item.product.id,
+                        item_name: item.title,
+                        item_category: item.product.type,
+                        item_variant: null,
+                        price: item.price,
+                        quantity: item.quantity,
+                        subscription_item: item.title.includes("Subscription")
+                    }
+                }),
+                subscription_included: order.lineItems.filter(item => item.title.includes("Subscription")).length > 0,
+            }
+        });
+    }
+
+    // set up additional conversion tracking if they take an upsell
+    Shopify.on('CheckoutAmended', function (newOrder, previousOrder) {
+        // identify which items were recently added, if any
+        const oldItems = previousOrder.lineItems.map(function (line) {
+            return line.id;
+        });
+
+        const addedItems = newOrder.lineItems.filter(
+            function (line) {
+                return oldItems.indexOf(line.id) < 0;
+            }
+        );
+
+        // no new items were added, so we skip conversion tracking
+        if (addedItems.length === 0) {
+            return;
+        }
+
+        // track additional purchase
+        dataLayer.push({ecommerce: null});
+        dataLayer.push({
+            event: "purchase",
+            ecommerce: {
+                currency: newOrder.currency,
+                transaction_id: newOrder.id,
+                affiliation: "Online Store",
+                value: newOrder.totalPrice - previousOrder.totalPrice,
+                items: addedItems.map(function (item) {
+                    return {
+                        item_id: item.product.id,
+                        item_name: item.title,
+                        item_category: item.product.type,
+                        item_variant: null,
+                        price: item.price,
+                        quantity: item.quantity,
+                        subscription_item: item.title.includes("Subscription")
+                    };
+                }),
+                subscription_included: addedItems.filter(item => item.title.includes("Subscription")).length > 0,
+            }
+        });
+    });
+</script>
+```
+
+### Purchase (Order Status)
+
+This needs be placed on /admin/settings/checkout under Additional scripts.
+
+```
+{% if first_time_accessed == true and post_purchase_page_accessed == false %}
     <script>
         // GA4 purchase
         dataLayer.push({ecommerce: null});
@@ -167,7 +254,6 @@ This needs be placed on /admin/settings/checkout under Additional scripts.
             }
         });
     </script>
-    
 {% endif %}
 ```
 
@@ -196,6 +282,7 @@ This needs be placed on /admin/settings/checkout under Additional scripts.
 ```
 
 Variable Mappings:
+
 ```
 Shopify.checkout.email
 Shopify.checkout.shipping_address.phone
@@ -208,8 +295,8 @@ Shopify.checkout.shipping_address.country_code
 Shopify.checkout.shipping_address.zip
 ```
 
+# Customer Events (Pixel)
 
-# V2
 ```
 (function (w, d, s, l, i) {
     w[l] = w[l] || [];
