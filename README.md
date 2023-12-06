@@ -190,14 +190,14 @@ This needs be placed on /admin/settings/checkout under Post-purchase additional 
         if (addedItems.length === 0) {
             return;
         }
-
+        
         // track additional purchase
         dataLayer.push({ecommerce: null});
         dataLayer.push({
             event: "purchase",
             ecommerce: {
                 currency: newOrder.currency,
-                transaction_id: newOrder.id,
+                transaction_id: `${newOrder.id}-upsell`,
                 affiliation: "Online Store",
                 value: newOrder.totalPrice - previousOrder.totalPrice,
                 items: addedItems.map(function (item) {
