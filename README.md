@@ -156,7 +156,7 @@ This needs be placed on /admin/settings/checkout under Post-purchase additional 
                 transaction_id: order.id,
                 affiliation: "Online Store",
                 value: order.totalPrice,
-                coupon: order.discounts,
+                coupon: order.discounts[0].code,
                 items: order.lineItems.map(function (item) {
                     return {
                         item_id: item.product.id,
