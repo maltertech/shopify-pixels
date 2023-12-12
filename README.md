@@ -428,7 +428,7 @@ analytics.subscribe("checkout_completed", (event) => {
             value: event.data.checkout.totalPrice.amount,
             tax: event.data.checkout.totalTax.amount,
             shipping: event.data.checkout.shippingLine.price.amount,
-            coupon: event.data.checkout.discountApplications.forEach(discount => discount.code),
+            coupon: event.data.checkout.discountApplications.map(discount => discount.title).join(","),
             items: event.data.checkout.lineItems.map(function (item) {
                 return {
                     item_id: item.variant.product.id,
