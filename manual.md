@@ -149,6 +149,7 @@ This needs be placed on /admin/settings/checkout under Post-purchase additional 
     // make sure the initial conversion isn't tracked twice
     if (!Shopify.wasPostPurchasePageSeen) {
         const order = window.Shopify.order;
+        // { "id": 5714202034495, "number": 553141, "checkoutToken": "2de8ee63b26ad156800fbf17d0a59d3f", "lineItems": [ { "id": 14584747458879, "finalLinePrice": "34.99", "finalPrice": "34.99", "lineLevelTotalDiscount": 0, "optionsWithValues": [ { "name": "Title", "value": "Default Title" } ], "originalLinePrice": "34.99", "originalPrice": "34.99", "price": "34.99", "product": { "id": 8952708530495, "type": "Toothpaste" }, "properties": [], "quantity": 1, "title": "LIVFRESH Wintergreen - 1 Pack", "variant": { "id": 47136226410815, "sku": "LIV1153-1X" } } ], "subtotalPrice": "34.99", "totalPrice": "39.98", "currency": "USD", "discounts": null, "customer": { "id": 7569136582975, "email": "zach@maltertech.com", "acceptsMarketing": false, "hasAccount": true, "firstName": "Zachary", "lastName": "Malter", "ordersCount": 11, "totalSpent": "45.31" } }
 
         // track initial conversion
         dataLayer.push({ecommerce: null});
