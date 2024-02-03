@@ -1,0 +1,82 @@
+<!---------------------
+Post-purchase page
+---------------------->
+
+<!-- Global Site Tag for Google Ads -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXX"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-XXXXXXXXX', {'allow_enhanced_conversions': true});
+</script>
+<!-- END Global Site Tag for Google Ads -->
+
+<!-- Event snippet for Google Ads Conversion Tag -->
+<script>
+    // track enhanced conversion
+    gtag('set', 'user_data', {
+        "email": user.email,
+    });
+
+    // make sure the initial conversion isn't tracked twice
+    if (!Shopify.wasPostPurchasePageSeen) {
+        const order = window.Shopify.order;
+
+        // track conversion
+        gtag('event', 'conversion', {
+            'send_to': 'AW-11387823727/Bi4bCLXVpf4YEO_MkbYq',
+            'value': order.totalPrice,
+            'currency': order.currency,
+            'transaction_id': order.id
+        });
+    }
+
+    // set up additional conversion tracking if they take an upsell
+    Shopify.on('CheckoutAmended', function (newOrder, previousOrder) {
+        // Identify newly added items by comparing previous and new orders
+        const oldItemIds = previousOrder.lineItems.map(item => item.id);
+        const addedItems = newOrder.lineItems.filter(item => !oldItemIds.includes(item.id));
+
+        // no new items were added, so we skip conversion tracking
+        if (addedItems.length === 0) {
+            return;
+        }
+
+        // track additional purchase
+        gtag('event', 'conversion', {
+            'send_to': 'AW-11387823727/Bi4bCLXVpf4YEO_MkbYq',
+            'value': newOrder.totalPrice - previousOrder.totalPrice,
+            'currency': newOrder.currency,
+            'transaction_id': `${newOrder.id}-upsell`
+        });
+    });
+</script>
+
+
+<!---------------------
+Order status page
+---------------------->
+
+{% if first_time_accessed == true and post_purchase_page_accessed == false %}
+    <!-- Global Site Tag for Google Ads -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-XXXXXXXXX', {'allow_enhanced_conversions': true});
+    </script>
+    <!-- END Global Site Tag for Google Ads -->
+
+    <script>
+        // track conversion
+        gtag('event', 'conversion', {
+            'send_to': 'AW-11387823727/Bi4bCLXVpf4YEO_MkbYq',
+            'value': {{ checkout.total_price | times: 0.01 }},
+            'currency': "{{ checkout.currency }}",
+            'transaction_id': "{{ checkout.order_id }}"
+        });
+    </script>
+{% endif %}
+
