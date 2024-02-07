@@ -90,7 +90,7 @@ Order status page
 
         // track conversion
         gtag('event', 'conversion', {
-            'send_to': 'AW-XXXXXXX/YYYYYYYYY',
+            'send_to': 'AW-XXXXXXXX/YYYYYYYYY',
             'value': {{ checkout.total_price | times: 0.01 }},
             'currency': "{{ checkout.currency }}",
             'transaction_id': "{{ checkout.order_id }}"
