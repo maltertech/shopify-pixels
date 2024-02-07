@@ -18,14 +18,14 @@ Post-purchase page
 
 <!-- Event snippet for Google Ads Conversion Tag -->
 <script>
-    // track enhanced conversion
-    gtag('set', 'user_data', {
-        "email": user.email,
-    });
-
     // make sure the initial conversion isn't tracked twice
     if (!Shopify.wasPostPurchasePageSeen) {
         const order = window.Shopify.order;
+
+        // track enhanced conversion
+        gtag('set', 'user_data', {
+            "email": order.customer.email,
+        });
 
         // track conversion
         gtag('event', 'conversion', {
@@ -46,6 +46,11 @@ Post-purchase page
         if (addedItems.length === 0) {
             return;
         }
+
+        // track enhanced conversion
+        gtag('set', 'user_data', {
+            "email": newOrder.customer.email
+        });
 
         // track additional purchase
         gtag('event', 'conversion', {
@@ -78,9 +83,14 @@ Order status page
     <!-- END Global Site Tag for Google Ads -->
 
     <script>
+        // track enhanced conversion
+        gtag('set', 'user_data', {
+            "email": "{{ customer.email }}"
+        });
+
         // track conversion
         gtag('event', 'conversion', {
-            'send_to': 'AW-11387823727/Bi4bCLXVpf4YEO_MkbYq',
+            'send_to': 'AW-XXXXXXX',
             'value': {{ checkout.total_price | times: 0.01 }},
             'currency': "{{ checkout.currency }}",
             'transaction_id': "{{ checkout.order_id }}"
