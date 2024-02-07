@@ -12,7 +12,7 @@ Post-purchase page
     }
 
     gtag('js', new Date());
-    gtag('config', 'AW-XXXXXXXXX', {'allow_enhanced_conversions': true});
+    gtag('config', 'AW-XXXXXXXX', {'allow_enhanced_conversions': true});
 </script>
 <!-- END Global Site Tag for Google Ads -->
 
@@ -29,7 +29,7 @@ Post-purchase page
 
         // track conversion
         gtag('event', 'conversion', {
-            'send_to': 'AW-11387823727/Bi4bCLXVpf4YEO_MkbYq',
+            'send_to': 'AW-XXXXXXXX/YYYYYYYYY',
             'value': order.totalPrice,
             'currency': order.currency,
             'transaction_id': order.id
@@ -54,7 +54,7 @@ Post-purchase page
 
         // track additional purchase
         gtag('event', 'conversion', {
-            'send_to': 'AW-11387823727/Bi4bCLXVpf4YEO_MkbYq',
+            'send_to': 'AW-XXXXXXXX/YYYYYYYYY',
             'value': newOrder.totalPrice - previousOrder.totalPrice,
             'currency': newOrder.currency,
             'transaction_id': `${newOrder.id}-upsell`
@@ -78,7 +78,7 @@ Order status page
         }
 
         gtag('js', new Date());
-        gtag('config', 'AW-XXXXXXXXX', {'allow_enhanced_conversions': true});
+        gtag('config', 'AW-XXXXXXXX', {'allow_enhanced_conversions': true});
     </script>
     <!-- END Global Site Tag for Google Ads -->
 
@@ -90,7 +90,7 @@ Order status page
 
         // track conversion
         gtag('event', 'conversion', {
-            'send_to': 'AW-XXXXXXX',
+            'send_to': 'AW-XXXXXXX/YYYYYYYYY',
             'value': {{ checkout.total_price | times: 0.01 }},
             'currency': "{{ checkout.currency }}",
             'transaction_id': "{{ checkout.order_id }}"
