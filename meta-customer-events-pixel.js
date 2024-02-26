@@ -36,7 +36,7 @@ analytics.subscribe("checkout_started", (event) => {
 });
 
 analytics.subscribe("checkout_completed", (event) => {
-  fbq('track', 'Purchase_V2', {
+  fbq('track', 'purchase', {
     currency: event.data?.checkout?.currencyCode,
     value: event.data?.checkout?.totalPrice?.amount,
   });
