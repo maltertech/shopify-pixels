@@ -32,8 +32,8 @@ analytics.subscribe("product_viewed", (event) => {
 
 analytics.subscribe("product_added_to_cart", (event) => {
     fbq("track", "AddToCart", {
-        currency: event.data.cartLine.merchandise.productVariant.price.currencyCode,
-        value: event.data.cartLine.merchandise.productVariant.price.amount,
+        currency: event.data.cartLine.cost.totalAmount.currencyCode,
+        value: event.data.cartLine.cost.totalAmount.amount,
     });
 });
 
