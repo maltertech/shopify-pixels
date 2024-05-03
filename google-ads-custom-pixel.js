@@ -44,13 +44,13 @@ analytics.subscribe("checkout_completed", (event) => {
         "email": event.data.checkout.email,
         "phone_number": event.data.checkout.phone,
         "address": {
-            "first_name": event.data.checkout.shippingAddress.firstName,
-            "last_name": event.data.checkout.shippingAddress.lastName,
-            "street": event.data.checkout.shippingAddress.address1,
-            "city": event.data.checkout.shippingAddress.city,
-            "region": event.data.checkout.shippingAddress.province,
-            "postal_code": event.data.checkout.shippingAddress.zip,
-            "country": event.data.checkout.shippingAddress.country
+            "first_name": event.data.checkout.shippingAddress?.firstName,
+            "last_name": event.data.checkout.shippingAddress?.lastName,
+            "street": event.data.checkout.shippingAddress?.address1,
+            "city": event.data.checkout.shippingAddress?.city,
+            "region": event.data.checkout.shippingAddress?.province,
+            "postal_code": event.data.checkout.shippingAddress?.zip,
+            "country": event.data.checkout.shippingAddress?.country
         }
     });
     gtag("event", "conversion", {
