@@ -15,7 +15,7 @@ analytics.subscribe("page_viewed", (event) => {
             var s = d.getElementsByTagName(n)[0];
             s.parentNode.insertBefore(e, s);
         }
-        w.spdt('conf', {key: 'dc8489fdb29c41e4996a30a3a3d2bc85'});
+        w.spdt('conf', {key: 'XXXXXXXXXXXXXXXXXXXXXXXX'});
         w.spdt('view');
     })(window, document);
 });
@@ -38,7 +38,7 @@ analytics.subscribe("product_added_to_cart", (event) => {
             var s = d.getElementsByTagName(n)[0];
             s.parentNode.insertBefore(e, s);
         }
-        w.spdt('conf', {key: 'dc8489fdb29c41e4996a30a3a3d2bc85'});
+        w.spdt('conf', {key: 'XXXXXXXXXXXXXXXXXXXXXXXX'});
         w.spdt('addtocart', {
             value: event.data.cartLine.cost.totalAmount.amount,
             currency: event.data.cartLine.cost.totalAmount.currencyCode,
@@ -72,7 +72,7 @@ analytics.subscribe("checkout_completed", (event) => {
             var s = d.getElementsByTagName(n)[0];
             s.parentNode.insertBefore(e, s);
         }
-        w.spdt('conf', {key: 'dc8489fdb29c41e4996a30a3a3d2bc85'});
+        w.spdt('conf', {key: 'XXXXXXXXXXXXXXXXXXXXXXXX'});
         w.spdt('purchase', {
             order_id: event.data.checkout.order.id,
             discount_code: event.data.checkout.discountApplications.map(discount => discount.title).join(","),
