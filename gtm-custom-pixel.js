@@ -10,7 +10,6 @@
 
 // GA4 view_item_list
 analytics.subscribe("collection_viewed", (event) => {
-    console.log(event)
     dataLayer.push({ecommerce: null});
     dataLayer.push({
         event: "view_item_list",
@@ -33,12 +32,11 @@ analytics.subscribe("collection_viewed", (event) => {
             })
         }
     });
-    console.log(dataLayer);
+    console.log("GTM dataLayer:", dataLayer);
 });
 
 // GA4 view_item
 analytics.subscribe("product_viewed", (event) => {
-    console.log(event)
     dataLayer.push({ecommerce: null});
     dataLayer.push({
         event: "view_item",
@@ -57,12 +55,11 @@ analytics.subscribe("product_viewed", (event) => {
             ]
         }
     });
-    console.log(dataLayer);
+    console.log("GTM dataLayer:", dataLayer);
 });
 
 // GA4 add_to_cart
 analytics.subscribe("product_added_to_cart", (event) => {
-    console.log(event)
     dataLayer.push({ecommerce: null});
     dataLayer.push({
         event: 'add_to_cart',
@@ -79,12 +76,11 @@ analytics.subscribe("product_added_to_cart", (event) => {
             }],
         }
     });
-    console.log(dataLayer);
+    console.log("GTM dataLayer:", dataLayer);
 });
 
 // GA4 begin_checkout
 analytics.subscribe("checkout_started", (event) => {
-    console.log(event)
     dataLayer.push({ecommerce: null});
     dataLayer.push({
         event: 'begin_checkout',
@@ -103,12 +99,11 @@ analytics.subscribe("checkout_started", (event) => {
             }),
         }
     });
-    console.log(dataLayer);
+    console.log("GTM dataLayer:", dataLayer);
 });
 
 // GA4 purchase
 analytics.subscribe("checkout_completed", (event) => {
-    console.log(event)
     dataLayer.push({ecommerce: null});
     dataLayer.push({
         event: "purchase",
@@ -132,5 +127,5 @@ analytics.subscribe("checkout_completed", (event) => {
             })
         }
     });
-    console.log(dataLayer);
+    console.log("GTM dataLayer:", dataLayer);
 });
