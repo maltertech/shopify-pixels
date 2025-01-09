@@ -76,9 +76,7 @@ analytics.subscribe("product_added_to_cart", (event) => {
                 item_variant: event.data.cartLine.merchandise.title,
                 price: event.data.cartLine.merchandise.price.amount,
                 quantity: event.data.cartLine.quantity,
-                subscription_item: event.data.cartLine.merchandise.product.title.includes("(Subscription)"),
             }],
-            subscription_included: event.data.cartLine.merchandise.product.title.includes("(Subscription)"),
         }
     });
     console.log(dataLayer);
@@ -101,10 +99,8 @@ analytics.subscribe("checkout_started", (event) => {
                     item_variant: item.variant.title,
                     price: item.variant.price.amount,
                     quantity: item.quantity,
-                    subscription_item: item.variant.product.title.includes("(Subscription)"),
                 }
             }),
-            subscription_included: event.data.checkout.lineItems.filter(item => item.variant.product.title.includes("(Subscription)")).length > 0,
         }
     });
     console.log(dataLayer);
@@ -132,7 +128,6 @@ analytics.subscribe("checkout_completed", (event) => {
                     item_variant: item.variant.title,
                     price: item.variant.price.amount,
                     quantity: item.quantity,
-                    subscription_item: item.variant.product.title.includes("(Subscription)"),
                 }
             })
         }
