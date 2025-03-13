@@ -15,6 +15,7 @@ analytics.subscribe("page_viewed", (event) => {
         page_location: event.context.window.location.href,
         page_title: event.context.document.title,
     });
+    console.log("GTM dataLayer:", dataLayer);
 });
 
 // collection_viewed
