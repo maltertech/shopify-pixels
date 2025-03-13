@@ -8,6 +8,15 @@
     f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-XXXXXX');
 
+// page_viewed
+analytics.subscribe("page_viewed", (event) => {
+    dataLayer.push({
+        event: "page_viewed",
+        page_location: event.context.window.location.href,
+        page_title: event.context.document.title,
+    });
+});
+
 // collection_viewed
 analytics.subscribe("collection_viewed", (event) => {
     dataLayer.push({ecommerce: null});
