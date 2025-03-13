@@ -8,7 +8,7 @@
     f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-XXXXXX');
 
-// GA4 view_item_list
+// collection_viewed
 analytics.subscribe("collection_viewed", (event) => {
     dataLayer.push({ecommerce: null});
     dataLayer.push({
@@ -35,7 +35,7 @@ analytics.subscribe("collection_viewed", (event) => {
     console.log("GTM dataLayer:", dataLayer);
 });
 
-// GA4 view_item
+// product_viewed
 analytics.subscribe("product_viewed", (event) => {
     dataLayer.push({ecommerce: null});
     dataLayer.push({
@@ -58,7 +58,7 @@ analytics.subscribe("product_viewed", (event) => {
     console.log("GTM dataLayer:", dataLayer);
 });
 
-// GA4 add_to_cart
+// product_added_to_cart
 analytics.subscribe("product_added_to_cart", (event) => {
     dataLayer.push({ecommerce: null});
     dataLayer.push({
@@ -79,7 +79,7 @@ analytics.subscribe("product_added_to_cart", (event) => {
     console.log("GTM dataLayer:", dataLayer);
 });
 
-// GA4 begin_checkout
+// checkout_started
 analytics.subscribe("checkout_started", (event) => {
     dataLayer.push({ecommerce: null});
     dataLayer.push({
@@ -102,7 +102,7 @@ analytics.subscribe("checkout_started", (event) => {
     console.log("GTM dataLayer:", dataLayer);
 });
 
-// GA4 purchase
+// checkout_completed
 analytics.subscribe("checkout_completed", (event) => {
     dataLayer.push({ecommerce: null});
     dataLayer.push({
@@ -126,6 +126,76 @@ analytics.subscribe("checkout_completed", (event) => {
                 }
             })
         }
+    });
+    console.log("GTM dataLayer:", dataLayer);
+});
+
+// cart_viewed
+analytics.subscribe("cart_viewed", (event) => {
+    dataLayer.push({ecommerce: null});
+    dataLayer.push({
+        event: "cart_viewed",
+        ecommerce: event.data
+    });
+    console.log("GTM dataLayer:", dataLayer);
+});
+
+// checkout_shipping_address_submitted
+analytics.subscribe("checkout_address_info_submitted", (event) => {
+    dataLayer.push({ecommerce: null});
+    dataLayer.push({
+        event: "checkout_address_info_submitted",
+        ecommerce: event.data
+    });
+    console.log("GTM dataLayer:", dataLayer);
+});
+
+// checkout_contact_info_submitted
+analytics.subscribe("checkout_contact_info_submitted", (event) => {
+    dataLayer.push({ecommerce: null});
+    dataLayer.push({
+        event: "checkout_contact_info_submitted",
+        ecommerce: event.data
+    });
+    console.log("GTM dataLayer:", dataLayer);
+});
+
+// checkout_shipping_info_submitted
+analytics.subscribe("checkout_shipping_info_submitted", (event) => {
+    dataLayer.push({ecommerce: null});
+    dataLayer.push({
+        event: "checkout_shipping_info_submitted",
+        ecommerce: event.data
+    });
+    console.log("GTM dataLayer:", dataLayer);
+});
+
+// payment_info_submitted
+analytics.subscribe("payment_info_submitted", (event) => {
+    dataLayer.push({ecommerce: null});
+    dataLayer.push({
+        event: "payment_info_submitted",
+        ecommerce: event.data
+    });
+    console.log("GTM dataLayer:", dataLayer);
+});
+
+// product_removed_from_cart
+analytics.subscribe("product_removed_from_cart", (event) => {
+    dataLayer.push({ecommerce: null});
+    dataLayer.push({
+        event: "product_removed_from_cart",
+        ecommerce: event.data
+    });
+    console.log("GTM dataLayer:", dataLayer);
+});
+
+// search_submitted
+analytics.subscribe("search_submitted", (event) => {
+    dataLayer.push({ecommerce: null});
+    dataLayer.push({
+        event: "search_submitted",
+        ecommerce: event.data
     });
     console.log("GTM dataLayer:", dataLayer);
 });
