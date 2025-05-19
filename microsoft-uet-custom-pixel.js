@@ -29,7 +29,7 @@ analytics.subscribe("checkout_completed", (event) => {
         }
     });
     window.uetq.push("event", "purchase", {
-        "revenue_value": Replevent.data.checkout.totalPrice.amount,
+        "revenue_value": event.data.checkout.totalPrice.amount,
         "currency": event.data.checkout.currencyCode
     });
 });
