@@ -8,6 +8,25 @@
     f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');
 
+// hash function for email and phone
+async function sha256(message) {
+    try {
+        // encode as UTF-8
+        const msgBuffer = new TextEncoder().encode(message);
+
+        // hash the message
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+
+        // convert ArrayBuffer to Array
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+        // convert bytes to hex string
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    } catch (e) {
+        return null;
+    }
+}
+
 // checkout_completed
 analytics.subscribe("checkout_completed", (event) => {
     dataLayer.push({ecommerce: null});
@@ -30,7 +49,10 @@ analytics.subscribe("checkout_completed", (event) => {
                     price: item.variant.price.amount,
                     quantity: item.quantity,
                 }
-            })
+            }),
+            // User data for enhanced conversions
+            "hashed_email": sha256(event.data.checkout.email),
+            "hashed_phone_number": sha256(event.data.checkout.phone),
         }
     });
     console.log("GTM dataLayer:", dataLayer);
