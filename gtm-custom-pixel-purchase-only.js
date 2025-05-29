@@ -28,7 +28,7 @@ async function sha256(message) {
 }
 
 // checkout_completed
-analytics.subscribe("checkout_completed", (event) => {
+analytics.subscribe("checkout_completed", async (event) => {
     dataLayer.push({ecommerce: null});
     dataLayer.push({
         event: "purchase",
@@ -51,8 +51,8 @@ analytics.subscribe("checkout_completed", (event) => {
                 }
             }),
             // User data for enhanced conversions
-            "hashed_email": sha256(event.data.checkout.email),
-            "hashed_phone_number": sha256(event.data.checkout.phone),
+            "hashed_email": await sha256(event.data.checkout.email),
+            "hashed_phone_number": await sha256(event.data.checkout.phone),
         }
     });
     console.log("GTM dataLayer:", dataLayer);
