@@ -6,7 +6,7 @@
     j.async = true;
     j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
     f.parentNode.insertBefore(j, f);
-})(window, document, 'script', 'dataLayer', 'GTM-W4GRHJXS');
+})(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');
 
 // checkout_completed
 analytics.subscribe("checkout_completed", (event) => {
