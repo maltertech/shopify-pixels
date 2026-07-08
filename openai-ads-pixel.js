@@ -47,7 +47,7 @@ if (oppref) {
 
 // page view
 analytics.subscribe("page_viewed", (event) => {
-    oaiq("measure", "page_viewed");
+    oaiq("measure", "page_viewed", {type: "contents"});
 });
 
 // product_viewed
