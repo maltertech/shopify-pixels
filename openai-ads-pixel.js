@@ -45,6 +45,17 @@ if (oppref) {
     });
 }
 
+// page view
+analytics.subscribe("page_viewed", (event) => {
+    const variant = event.data.productVariant;
+    oaiq("measure", "page_viewed", {
+        type: "contents",
+        contents: [{
+            name: event.context.document.location.href
+        }],
+    });
+});
+
 // product_viewed
 analytics.subscribe("product_viewed", (event) => {
     const variant = event.data.productVariant;
