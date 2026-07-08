@@ -47,7 +47,16 @@ if (oppref) {
 
 // page view
 analytics.subscribe("page_viewed", (event) => {
-    oaiq("measure", "page_viewed", {type: "contents"});
+    // OpenAI drops page_viewed with an empty contents[], so send the page itself as a content entry
+    const doc = event.context.document;
+    oaiq("measure", "page_viewed", {
+        type: "contents",
+        contents: [{
+            id: doc.location.pathname,
+            name: doc.title,
+            content_type: "page",
+        }],
+    });
 });
 
 // product_viewed
